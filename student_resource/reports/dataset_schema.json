@@ -1,0 +1,92 @@
+{
+  "challenge": "Amazon ML Challenge 2026 - Business Entity Resolution",
+  "datasets": {
+    "train_source1": {
+      "file": "dataset/train/train_source1.tsv",
+      "delimiter": "\\t",
+      "rows": 2206821,
+      "columns": {
+        "entity_id": {"type": "string", "prefix": "S1-", "role": "identifier", "nullable": false},
+        "business_name": {"type": "string", "role": "feature", "nullable": true},
+        "business_address": {"type": "string", "role": "feature", "nullable": true},
+        "country": {"type": "string", "role": "feature", "nullable": true, "known_values_train": ["US", "India"]}
+      }
+    },
+    "train_source2": {
+      "file": "dataset/train/train_source2.tsv",
+      "delimiter": "\\t",
+      "rows": 5034616,
+      "columns": {
+        "entity_id": {"type": "string", "prefix": "S2-", "role": "identifier", "nullable": false},
+        "business_name": {"type": "string", "role": "feature", "nullable": true},
+        "business_address": {"type": "string", "role": "feature", "nullable": true},
+        "country": {"type": "string", "role": "feature", "nullable": true, "known_values_train": ["US", "India"]}
+      }
+    },
+    "train_source3": {
+      "file": "dataset/train/train_source3.tsv",
+      "delimiter": "\\t",
+      "rows": 5285603,
+      "columns": {
+        "entity_id": {"type": "string", "prefix": "S3-", "role": "identifier", "nullable": false},
+        "business_name": {"type": "string", "role": "feature", "nullable": true},
+        "business_address": {"type": "string", "role": "feature", "nullable": true},
+        "country": {"type": "string", "role": "feature", "nullable": true, "known_values_train": ["US", "India"]}
+      }
+    },
+    "train_ground_truth": {
+      "file": "dataset/train/train_ground_truth.tsv",
+      "delimiter": "\\t",
+      "rows": 2206821,
+      "columns": {
+        "source1_entity_id": {"type": "string", "prefix": "S1-", "role": "identifier", "nullable": false},
+        "matched_entity_ids": {"type": "string", "role": "label", "nullable": true, "format": "comma-separated S2/S3 IDs, empty for singletons"}
+      }
+    },
+    "test_source1": {
+      "file": "dataset/test/test_source1.tsv",
+      "delimiter": "\\t",
+      "rows": 1732544,
+      "columns": {
+        "entity_id": {"type": "string", "prefix": "S1-", "role": "identifier", "nullable": false},
+        "business_name": {"type": "string", "role": "feature", "nullable": true},
+        "business_address": {"type": "string", "role": "feature", "nullable": true},
+        "country": {"type": "string", "role": "feature", "nullable": true, "known_values_test": ["US", "India", "France"]}
+      }
+    },
+    "test_source2": {
+      "file": "dataset/test/test_source2.tsv",
+      "delimiter": "\\t",
+      "rows": 4887273,
+      "columns": {
+        "entity_id": {"type": "string", "prefix": "S2-", "role": "identifier", "nullable": false},
+        "business_name": {"type": "string", "role": "feature", "nullable": true},
+        "business_address": {"type": "string", "role": "feature", "nullable": true},
+        "country": {"type": "string", "role": "feature", "nullable": true, "known_values_test": ["US", "India", "France"]}
+      }
+    },
+    "test_source3": {
+      "file": "dataset/test/test_source3.tsv",
+      "delimiter": "\\t",
+      "rows": 5082316,
+      "columns": {
+        "entity_id": {"type": "string", "prefix": "S3-", "role": "identifier", "nullable": false},
+        "business_name": {"type": "string", "role": "feature", "nullable": true},
+        "business_address": {"type": "string", "role": "feature", "nullable": true},
+        "country": {"type": "string", "role": "feature", "nullable": true, "known_values_test": ["US", "India", "France"]}
+      }
+    }
+  },
+  "task": {
+    "type": "entity_resolution",
+    "prediction_target": "For each S1 entity, find all matching S2/S3 entities",
+    "evaluation_metric": "F_0.5 (macro-averaged per S1 entity)",
+    "evaluation_formula": "F_0.5 = (1.25 * Precision * Recall) / (0.25 * Precision + Recall)"
+  },
+  "submission": {
+    "scored_file": "output/matching_results.tsv",
+    "audit_file": "output/candidate_pairs.tsv",
+    "delimiter": "\\t",
+    "encoding": "utf-8"
+  }
+}
