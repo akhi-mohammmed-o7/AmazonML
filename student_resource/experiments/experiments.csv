@@ -1,0 +1,2 @@
+experiment_id,timestamp,model,blocking_method,threshold,macro_f05,macro_precision,macro_recall,singleton_accuracy,avg_candidates,runtime_sec,notes
+EXP_000_BASELINE,2026-09-26 14:15,RuleSimilarityBaseline,InvertedIndexTokens,0.52,0.1483,0.2026,0.1247,0.5738,29.6,13.66,Initial fast heuristic baseline with token & n-gram Jaccard matching
